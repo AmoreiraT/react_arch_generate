@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Chrome HSBC Portal",
+      "name": "Launch Chrome WEB Portal",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:3000",
@@ -66,23 +66,23 @@
   "compounds": [
     {
       "name": "Run DEV",
-      "configurations": ["Vite DEV Server", "Launch Chrome HSBC Portal"]
+      "configurations": ["Vite DEV Server", "Launch Chrome WEB Portal"]
     },
     {
       "name": "Run UAT",
-      "configurations": ["Vite UAT Server", "Launch Chrome HSBC Portal"]
+      "configurations": ["Vite UAT Server", "Launch Chrome WEB Portal"]
     },
     {
       "name": "Run SIT",
-      "configurations": ["Vite SIT Server", "Launch Chrome HSBC Portal"]
+      "configurations": ["Vite SIT Server", "Launch Chrome WEB Portal"]
     },
     {
       "name": "Run PROD",
-      "configurations": ["Vite PROD Server", "Launch Chrome HSBC Portal"]
+      "configurations": ["Vite PROD Server", "Launch Chrome WEB Portal"]
     },
     {
       "name": "Run LOCAL",
-      "configurations": ["Vite LOCAL Server", "Launch Chrome HSBC Portal"]
+      "configurations": ["Vite LOCAL Server", "Launch Chrome WEB Portal"]
     }
   ]
 }

@@ -134,7 +134,7 @@ interface ErrorHandler {
   handleError(error: any): void;
 }
 
-export class HSBCErrorHandler implements ErrorHandler {
+export class WEBErrorHandler implements ErrorHandler {
   // eslint-disable-next-line class-methods-use-this
   handleError(error: any) {
     // logCrash(error);
