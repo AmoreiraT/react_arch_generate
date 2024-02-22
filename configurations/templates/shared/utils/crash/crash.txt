@@ -1,0 +1,142 @@
+function isLocal(): boolean {
+  return (
+    window.location?.href?.includes('localhost') ||
+    window.location?.href?.includes('127.0.0.1')
+  );
+}
+
+const getApiUrl = (env: string) => {
+  switch (env) {
+    case 'UAT':
+      return import.meta.env.VITE_API_BASE_URL_UAT;
+    case 'VITE_API_BASE_URL_SIT':
+      return import.meta.env.VITE_API_BASE_URL_SIT;
+    case 'VITE_API_BASE_URL_PROD':
+      return import.meta.env.VITE_API_BASE_URL_PROD;
+    case 'VITE_API_BASE_URL_LOCAL':
+      return import.meta.env.VITE_API_BASE_URL_LOCAL;
+    case 'VITE_API_BASE_URL_DEV':
+      return import.meta.env.VITE_API_BASE_URL_DEV;
+    default:
+      return import.meta.env.VITE_API_BASE_URL;
+  }
+};
+
+function showOverlay(): boolean {
+  const env = import.meta.env.VITE_API_BASE_URL;
+  return isLocal() || env === 'VITE_API_BASE_URL_SIT';
+}
+
+export function logCrash(e: any) {
+  try {
+    const msg = e.message || e.toString();
+    const showStack = true;
+    const l = window.location.href;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    let str = `\n${l}\n${''}\n${navigator?.userAgent}\n\n${e.name}\n`;
+
+    if (e.url) str += `${e.url}\n\n`;
+
+    if (msg) str += `${msg}\n\n`;
+
+    if (e.status) str += `${e.status}\n`;
+    if (e.statusText) str += `${e.statusText}\n\n`;
+
+    if (showStack && e.stack) str += `${e.stack}\n`;
+    if (e.request_id) str += `${e.request_id}\n`;
+    if (e.fileName) str += `${e.fileName}\n`;
+    if (e.lineNumber) str += `${e.lineNumber}\n`;
+    if (e.columnNumber) str += `${e.columnNumber}\n`;
+
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    sendDebugDataToServer(str, `${''} - ${msg ?? e.stack ?? ''}`);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function sendDebugDataToServer(str: string, subject: string): void {
+  try {
+    const cloneSubject = subject?.trim() ?? '';
+  } catch (_e) {
+    console.error(_e);
+  }
+}
+
+function catchFn(event: any) {
+  try {
+    // logCrash(event);
+    const l = window.location.href;
+
+    const stack =
+      event.reason?.stack ?? event.stack ?? event.reason ?? event.toString();
+
+    const str = `UnhandledRejection\n\n${l}\n${''}\n${
+      navigator?.userAgent
+    }\n\n${event.message}\n${stack}`;
+
+    sendDebugDataToServer(str, `${''} - ${event.message ?? stack ?? ''}`);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export function setupLogCrash() {
+  try {
+    window.addEventListener('error', (event: ErrorEvent) => {
+      const { message } = event;
+
+      const { error } = event;
+      const { lineno } = event;
+      const { colno } = event;
+
+      if (!error && !lineno && !colno) {
+        return;
+      }
+
+      try {
+        // logCrash(event);
+        const l = window.location.href;
+        // const useUsuario = useGetUsernameFromStore();
+        const str = `OnError\n\n${l}\n${''}\n${
+          navigator?.userAgent
+        }\n\n${message}\n${error}\n${lineno}\n${colno}`;
+
+        sendDebugDataToServer(str, `${''} - ${message ?? error ?? ''}`);
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  } catch (_err) {
+    console.error(_err);
+  }
+  try {
+    window.addEventListener(
+      'unhandledrejection',
+      (event) => catchFn(event),
+      true
+    );
+  } catch (_err) {
+    console.error(_err);
+  }
+  try {
+    window.addEventListener(
+      'uncaughtexception',
+      (event) => catchFn(event),
+      true
+    );
+  } catch (_err) {
+    console.error(_err);
+  }
+}
+
+interface ErrorHandler {
+  handleError(error: any): void;
+}
+
+export class HSBCErrorHandler implements ErrorHandler {
+  // eslint-disable-next-line class-methods-use-this
+  handleError(error: any) {
+    // logCrash(error);
+  }
+}

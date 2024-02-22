@@ -1,0 +1,88 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Chrome HSBC Portal",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///./src/*": "${webRoot}/*"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Vite DEV Server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "autoAttachChildProcesses": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Vite UAT Server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:uatportal"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "autoAttachChildProcesses": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Vite SIT Server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:sit"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "autoAttachChildProcesses": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Vite PROD Server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:prod"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "autoAttachChildProcesses": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Vite LOCAL Server",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:local"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "autoAttachChildProcesses": true
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Run DEV",
+      "configurations": ["Vite DEV Server", "Launch Chrome HSBC Portal"]
+    },
+    {
+      "name": "Run UAT",
+      "configurations": ["Vite UAT Server", "Launch Chrome HSBC Portal"]
+    },
+    {
+      "name": "Run SIT",
+      "configurations": ["Vite SIT Server", "Launch Chrome HSBC Portal"]
+    },
+    {
+      "name": "Run PROD",
+      "configurations": ["Vite PROD Server", "Launch Chrome HSBC Portal"]
+    },
+    {
+      "name": "Run LOCAL",
+      "configurations": ["Vite LOCAL Server", "Launch Chrome HSBC Portal"]
+    }
+  ]
+}
