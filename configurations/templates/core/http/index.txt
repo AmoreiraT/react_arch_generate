@@ -39,11 +39,36 @@ export const useHttpClient = () => {
       } as AxiosRequestConfig<T>)
       .then((res) => {
         console.info('res:', res);
-
         return res as ApiResponse<T>;
       })
       .catch((err) => {
-        // logCrash(err);
+        let wellKnowError = false;
+
+        const obj = { ...err };
+
+        if ('response' in err) {
+          switch (err.response.data?.code) {
+            case 'SFL3-F0029':
+              wellKnowError = true;
+              break;
+            default:
+              wellKnowError = false;
+          }
+          if (err.response?.data?.code || err.response?.data?.message) {
+            if (obj.message)
+              obj.message += `\n ${err.response?.data?.code} - ${err.response?.data?.message}`;
+            else
+              obj.message = `${err.response?.data?.code} - ${err.response?.data?.message}`;
+          }
+          obj.status = err.response.status;
+          obj.statusText = err.response.statusText;
+        }
+
+        if (!wellKnowError) {
+          obj.url = `${apiUrl}${requestData.url}`;
+          logCrash(obj);
+        }
+
         if (
           ('response' in err && err.response?.data.code === '999') ||
           ('response' in err && err.response?.data.code === 'KCB-40')
@@ -51,6 +76,7 @@ export const useHttpClient = () => {
           navigate(`/system-error`);
           // logCrash(err.response);
         }
+
         const getErrNetWork = err as AxiosError;
         if (getErrNetWork.code === 'ERR_NETWORK') {
           navigate(`/system-error`);
@@ -75,13 +101,16 @@ export const useHttpClient = () => {
         return res as ApiResponse<T>;
       })
       .catch((err) => {
-        // logCrash(err);
+        const obj = { ...err };
+        obj.url = `${apiUrl}${requestData.url}`;
+
+        logCrash(obj);
         return err as TimeoutError;
       });
   };
 
   axios.interceptors.request.use((req) => {
-    const token = getLocalStorage('@access-token');
+    const token = getLocalStorage('@token');
 
     if (token && req.headers) req.headers.Authorization = `Bearer ${token}`;
 

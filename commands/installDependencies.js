@@ -2,6 +2,67 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+const dependencies = [
+    '@emotion/react',
+    '@emotion/styled',
+    '@mdx-js/rollup',
+    '@react-hooks-library/core',
+    'axios',
+    'formik',
+    'i18next',
+    'react-device-detect',
+    'react-error-boundary',
+    'react-grid-layout',
+    'react-hook-form',
+    'react-i18next',
+    'react-is',
+    'react-jwt',
+    'react-query',
+    'react-router-dom',
+    'styled-components',
+    'uuid',
+    'webpack',
+    'yup',
+    'zustand'
+];
+
+const devDependencies = [
+    '@babel/core',
+    '@jest/globals',
+    '@testing-library/jest-dom',
+    '@testing-library/react',
+    '@types/jest',
+    '@types/node',
+    '@types/react',
+    '@types/react-dom',
+    '@types/react-grid-layout',
+    '@types/styled-components',
+    '@types/uuid',
+    '@typescript-eslint/eslint-plugin',
+    '@typescript-eslint/parser',
+    '@vitejs/plugin-react',
+    '@vitest/ui',
+    'babel-loader',
+    'cross-env',
+    'env-cmd',
+    'eslint',
+    // 'eslint-config-airbnb',
+    // 'eslint-config-airbnb-typescript',
+    'eslint-config-prettier',
+    'eslint-plugin-import',
+    'eslint-plugin-jsx-a11y',
+    'eslint-plugin-prettier',
+    'eslint-plugin-react',
+    'eslint-plugin-react-hooks',
+    'jest',
+    'jsdom',
+    'prettier',
+    'prop-types',
+    'typescript',
+    'vite',
+    'vitest'
+];
+
 const additionalPackages = {
     "scripts": {
         "dev": "env-cmd -f .env vite --host",
@@ -21,66 +82,6 @@ const additionalPackages = {
         "test": "vitest",
         "vitest-ui": "vitest --ui"
     },
-    "dependencies": {
-        "@emotion/react": "^11.10.5",
-        "@emotion/styled": "^11.10.5",
-        "@mdx-js/rollup": "^3.0.0",
-        "@react-hooks-library/core": "^0.5.2",
-        "axios": "^1.6.7",
-        "formik": "^2.4.5",
-        "i18next": "^22.4.10",
-        "react-device-detect": "^2.2.3",
-        "react-error-boundary": "^4.0.12",
-        "react-grid-layout": "^1.3.4",
-        "react-hook-form": "^7.50.1",
-        "react-i18next": "^12.2.0",
-        "react-is": "^18.2.0",
-        "react-jwt": "^1.1.8",
-        "react-query": "^3.39.3",
-        "react-refresh": "^0.14.0",
-        "react-router-dom": "^6.22.0",
-        "styled-components": "^5.3.6",
-        "uuid": "^9.0.0",
-        "webpack": "^5.90.1",
-        "yup": "^1.0.2",
-        "zustand": "^4.5.0"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.23.9",
-        "@jest/globals": "^29.7.0",
-        "@testing-library/jest-dom": "^6.4.2",
-        "@testing-library/react": "^14.2.1",
-        "@types/jest": "^29.5.12",
-        "@types/node": "^18.13.0",
-        "@types/react": "^18.0.28",
-        "@types/react-dom": "^18.2.19",
-        "@types/react-grid-layout": "^1.3.2",
-        "@types/styled-components": "^5.1.26",
-        "@types/uuid": "^9.0.1",
-        "@typescript-eslint/eslint-plugin": "^5.52.0",
-        "@typescript-eslint/parser": "^5.62.0",
-        "@vitejs/plugin-react": "^4.2.1",
-        "@vitest/ui": "^1.2.2",
-        "babel-loader": "^9.1.3",
-        "cross-env": "^7.0.3",
-        "env-cmd": "^10.1.0",
-        "eslint": "^8.34.0",
-        "eslint-config-airbnb": "^19.0.4",
-        "eslint-config-airbnb-typescript": "^17.0.0",
-        "eslint-config-prettier": "^8.6.0",
-        "eslint-plugin-import": "^2.27.5",
-        "eslint-plugin-jsx-a11y": "^6.7.1",
-        "eslint-plugin-prettier": "^4.2.1",
-        "eslint-plugin-react": "^7.32.2",
-        "eslint-plugin-react-hooks": "^4.6.0",
-        "jest": "^29.7.0",
-        "jsdom": "^24.0.0",
-        "prettier": "^2.8.4",
-        "prop-types": "^15.8.1",
-        "typescript": "^5.2.2",
-        "vite": "^5.0.12",
-        "vitest": "^1.2.2"
-    }
 };
 
 function installDependencies(appName, packageManager = 'npm') {
@@ -92,8 +93,6 @@ function installDependencies(appName, packageManager = 'npm') {
 
     Object.assign(packageJson.scripts, additionalPackages.scripts);
 
-    Object.assign(packageJson.dependencies, additionalPackages.dependencies);
-    Object.assign(packageJson.devDependencies, additionalPackages.devDependencies);
 
     fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
     console.info('Updated package.json scripts.');
@@ -121,6 +120,24 @@ function installDependencies(appName, packageManager = 'npm') {
 
     execSync(installCommand, { stdio: 'inherit' });
     console.info('Dependencies installed successfully.');
+
+    execSync(`${packageManager} audit fix --force`, { stdio: 'inherit' });
+    console.info('Dependencies audit fixed successfully.');
+
+    console.info(`Installing another necessaries dependencies using ${packageManager}...`);
+    for (const dependency of dependencies) {
+        console.info(`Installing  ${dependency}...`);
+        execSync(`${packageManager} i ${dependency} --save`, { stdio: 'inherit' });
+    }
+
+    console.info(`Installing another necessaries devDependencies using ${packageManager}...`);
+    for (const devDependency of devDependencies) {
+        console.info(`Installing  ${devDependency}...`);
+        execSync(`${packageManager} i ${devDependency} --save-dev`, { stdio: 'inherit' });
+    }
+
+
+    console.log(`%cAll ready!`, "color: yellow; font-style: italic; background-color: blue;padding: 2px");
 }
 
 module.exports = installDependencies;

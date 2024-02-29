@@ -1,0 +1,40 @@
+// router
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { PrivateRoute } from './PrivateRoute';
+import { VerifyNotFound } from './VerifyNotFound';
+
+const createRoutes = () => {
+  return createBrowserRouter([
+    {
+      path: '/',
+
+      element: <></>,
+
+      children: [
+        {
+          index: true,
+          element:<></>,
+        },
+        {
+          path: '*',
+          element: <></>,
+        },
+        {
+          path: '/system-error',
+          element: <VerifyNotFound component={ <></>} />,
+        },
+    
+        {
+          path: '',
+          element: <PrivateRoute component={<></>} />,
+        },
+      ],
+    },
+  ]);
+};
+
+export function Routes() {
+  const router = createRoutes();
+
+  return <RouterProvider router={router} />;
+}

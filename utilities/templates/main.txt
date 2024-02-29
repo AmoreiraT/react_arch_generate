@@ -1,0 +1,49 @@
+import ReactDOM from 'react-dom/client';
+import { StrictMode } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
+// theme
+import { GlobalStyle } from '@shared/styles/global';
+
+// routes
+import { ThemeProvider } from 'styled-components';
+import { theme } from '@shared/styles/customTheme';
+import { ErrorBoundary } from '@shared/components/ErrorBoundary';
+import { setupLogCrash } from '@shared/utils/crash/crash';
+import { Routes } from './routes/index.routes';
+
+// Import i18n.ts
+import './i18n';
+
+setupLogCrash();
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+      staleTime: 1000 * 60 * 1,
+      refetchInterval: 3000,
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+    },
+  },
+});
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
+  <QueryClientProvider client={queryClient} contextSharing>
+    <ErrorBoundary>
+      <ThemeProvider theme={theme}>
+            <Routes />
+        <GlobalStyle />
+      </ThemeProvider>
+    </ErrorBoundary>
+    {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+  </QueryClientProvider>
+);

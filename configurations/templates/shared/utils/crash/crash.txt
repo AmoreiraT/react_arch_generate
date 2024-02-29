@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
+import { ErrorInfo } from 'react';
+
 function isLocal(): boolean {
   return (
     window.location?.href?.includes('localhost') ||
@@ -23,43 +27,104 @@ const getApiUrl = (env: string) => {
 };
 
 function showOverlay(): boolean {
-  const env = import.meta.env.VITE_API_BASE_URL;
-  return isLocal() || env === 'VITE_API_BASE_URL_SIT';
+  const env = import.meta.env.VITE_AMBIENTE;
+  return isLocal() || env === 'dev';
 }
-
-export function logCrash(e: any) {
+function getUsername(): string {
   try {
+    return localStorage.getItem('@userName') ?? '';
+  } catch {
+    return '';
+  }
+}
+function sendDebugDataToServer(str: string, subject: string): void {
+  try {
+    if (showOverlay()) {
+      const elem =
+        document.getElementById('project-crashOverlay') ??
+        document.createElement('div');
+      if (!elem.id) {
+        elem.id = 'project-crashOverlay';
+        document.body.appendChild(elem);
+      }
+      elem.style.display = 'block';
+
+      const div = document.createElement('div');
+      div.innerText = str;
+      elem.appendChild(div);
+
+      div.addEventListener('click', () => {
+        try {
+          elem.removeChild(div);
+          if (elem.children.length === 0) {
+            elem.style.display = 'none';
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      });
+    }
+
+    if (isLocal()) return;
+
+    try {
+      const envUrl = getApiUrl(import.meta.env.VITE_API_BASE_URL);
+      const stage = import.meta.env.VITE_AMBIENTE;
+      const req = new Request(`${envUrl}api/Corporate/crash`, {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+        mode: 'cors',
+        body: JSON.stringify({
+          text: `${stage}\n${getUsername()}\n${str}`,
+          subject: subject?.trim() ?? '',
+        }),
+        cache: 'no-cache',
+        // credentials: "include"
+      });
+      fetch(req)
+        .then(() => true)
+        .catch((f) => console.error(f));
+    } catch (e) {
+      console.error(e);
+    }
+  } catch (_e) {
+    console.error(_e);
+  }
+}
+export function logCrash(e: any, errorInfo: ErrorInfo | null = null) {
+  try {
+    if (e.status === 401) {
+      // not logged in
+      return;
+    }
     const msg = e.message || e.toString();
     const showStack = true;
     const l = window.location.href;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+
     let str = `\n${l}\n${''}\n${navigator?.userAgent}\n\n${e.name}\n`;
 
     if (e.url) str += `${e.url}\n\n`;
 
-    if (msg) str += `${msg}\n\n`;
+    if (e.code) str += `${e.code}\n`;
+    if (msg) str += `${msg}\n`;
 
     if (e.status) str += `${e.status}\n`;
     if (e.statusText) str += `${e.statusText}\n\n`;
 
-    if (showStack && e.stack) str += `${e.stack}\n`;
+    if (errorInfo?.componentStack != null)
+      str += `${errorInfo?.componentStack}\n`;
+    else if (showStack && e.stack) str += `${e.stack}\n`;
+
     if (e.request_id) str += `${e.request_id}\n`;
     if (e.fileName) str += `${e.fileName}\n`;
     if (e.lineNumber) str += `${e.lineNumber}\n`;
     if (e.columnNumber) str += `${e.columnNumber}\n`;
 
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     sendDebugDataToServer(str, `${''} - ${msg ?? e.stack ?? ''}`);
   } catch (err) {
     console.error(err);
-  }
-}
-
-function sendDebugDataToServer(str: string, subject: string): void {
-  try {
-    const cloneSubject = subject?.trim() ?? '';
-  } catch (_e) {
-    console.error(_e);
   }
 }
 
@@ -84,11 +149,7 @@ function catchFn(event: any) {
 export function setupLogCrash() {
   try {
     window.addEventListener('error', (event: ErrorEvent) => {
-      const { message } = event;
-
-      const { error } = event;
-      const { lineno } = event;
-      const { colno } = event;
+      const { message, error, lineno, colno } = event;
 
       if (!error && !lineno && !colno) {
         return;
@@ -104,6 +165,7 @@ export function setupLogCrash() {
 
         sendDebugDataToServer(str, `${''} - ${message ?? error ?? ''}`);
       } catch (err) {
+        console.error(event);
         console.error(err);
       }
     });
@@ -134,9 +196,9 @@ interface ErrorHandler {
   handleError(error: any): void;
 }
 
-export class WEBErrorHandler implements ErrorHandler {
+export class ProjectErrorHandler implements ErrorHandler {
   // eslint-disable-next-line class-methods-use-this
   handleError(error: any) {
-    // logCrash(error);
+    logCrash(error);
   }
 }

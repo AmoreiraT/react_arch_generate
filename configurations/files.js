@@ -200,6 +200,53 @@ const vscodeextensionsFilePath = path.join(__dirname, 'templates', 'vscode', 'ex
 const vscodeextensionsContent = fs.readFileSync(vscodeextensionsFilePath, 'utf8');
 
 
+function gerarCaminhoEConteudo({ basePath, relativePath, destinationPath, format }) {
+    // Verifica se a extensão já está presente no nome do arquivo
+    const hasFormat = relativePath.endsWith(format);
+
+    // Monta o caminho do arquivo de template com ou sem '.txt'
+    const filePath = hasFormat
+
+        ? path.join(__dirname, basePath, `${relativePath}.txt`) : path.join(__dirname, basePath, ...relativePath.split('/'));
+
+    // Define o caminho de destino
+    const destinationPathSet = hasFormat
+        ? path.join(destinationPath, hasFormat ? relativePath : relativePath.replace('.txt', ''))
+        : path.join(destinationPath, hasFormat ? relativePath : relativePath.replace('.txt', format));
+
+    // Lê o conteúdo do arquivo
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+
+    return {
+        path: destinationPathSet,
+        content: fileContent,
+    };
+}
+
+const eslintrcModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '.eslintrc.cjs', destinationPath: '', format: '.cjs' });
+
+const prettierrcModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '.prettierrc.cjs', destinationPath: '', format: '.cjs' });
+
+const eslintignoreModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '.eslintignore', destinationPath: '', format: '' });
+
+const editorconfigModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '.editorconfig', destinationPath: '', format: '' });
+
+const stylesLogCrashModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/public/styles.css', destinationPath: '', format: 'css' });
+
+const errorBoundaryModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/shared/components/ErrorBoundary/index.txt', destinationPath: 'src', format: '.tsx' });
+
+const stylesCustomThemeModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/shared/styles/customTheme.txt', destinationPath: 'src', format: '.ts' });
+
+const stylesAnimationsModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/shared/styles/animations.txt', destinationPath: 'src', format: '.ts' });
+
+const stylesGlobalStylesModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/shared/styles/global.txt', destinationPath: 'src', format: '.ts' });
+
+const routesIndexRouteModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/routes/index.routes.txt', destinationPath: 'src', format: '.tsx' });
+
+const routesPrivateRouteModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/routes/PrivateRoute/index.txt', destinationPath: 'src', format: '.tsx' });
+
+const routesVerifyNotFoundModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/routes/VerifyNotFound/index.txt', destinationPath: 'src', format: '.tsx' });
+
 module.exports = [
     {
         path: path.join('src', 'core', 'http', 'protocols', 'index.ts'),
@@ -409,4 +456,16 @@ VITE_AMBIENTE=uat`,
 VITE_MUI_LICENSE_TOKEN=6be6
 VITE_AMBIENTE=local`,
     },
+    editorconfigModule,
+    eslintignoreModule,
+    eslintrcModule,
+    prettierrcModule,
+    stylesLogCrashModule,
+    errorBoundaryModule,
+    stylesCustomThemeModule,
+    stylesAnimationsModule,
+    stylesGlobalStylesModule,
+    routesIndexRouteModule,
+    routesPrivateRouteModule,
+    routesVerifyNotFoundModule,
 ];

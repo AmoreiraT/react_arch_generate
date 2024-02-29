@@ -3,7 +3,7 @@ const installDependencies = require('./commands/installDependencies.js');
 const setupDirectories = require('./configurations/directories.js');
 const setupFiles = require('./configurations/files.js');
 const { createFiles, createDirectories } = require('./utilities/fileOperations.js');
-const { modifyTsConfig, modifyViteConfig } = require('./utilities/configModifications.js');
+const { modifyTsConfig, modifyViteConfig, removerArquivosGerados, modifyMainTxt } = require('./utilities/configModifications.js');
 
 const appName = process.argv[2] || 'my-react-app';
 
@@ -26,6 +26,10 @@ async function initReact() {
     console.info('Modifying configuration files...');
     modifyTsConfig(appName);
     modifyViteConfig(appName);
+    modifyMainTxt(appName);
+
+    console.info('Removing generated files...');
+    removerArquivosGerados(appName);
 
     console.info('Installing dependencies...');
     installDependencies(appName, packageManager);
