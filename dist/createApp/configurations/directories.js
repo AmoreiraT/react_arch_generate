@@ -1,4 +1,7 @@
-module.exports = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.directories = void 0;
+exports.directories = [
     'src/core',
     'src/core/http',
     'src/core/http/protocols',

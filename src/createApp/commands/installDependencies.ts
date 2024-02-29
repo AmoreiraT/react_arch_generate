@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+import fs from 'fs';
+import path from 'path';
+import { execSync } from 'child_process';
 
 const dependencies = [
     '@emotion/react',
@@ -84,7 +84,7 @@ const additionalPackages = {
     },
 };
 
-function installDependencies(appName, packageManager = 'npm') {
+export function installDependencies(appName: string, packageManager = 'npm') {
     process.chdir(appName);
 
 
@@ -140,4 +140,3 @@ function installDependencies(appName, packageManager = 'npm') {
     console.log(`%cAll ready!`, "color: yellow; font-style: italic; background-color: blue;padding: 2px");
 }
 
-module.exports = installDependencies;

@@ -1,5 +1,5 @@
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 
 // core/http/protocols
 const protocolsIndexFilePath = path.join(__dirname, 'templates', 'core', 'http', 'protocols', 'index.txt');
@@ -200,7 +200,14 @@ const vscodeextensionsFilePath = path.join(__dirname, 'templates', 'vscode', 'ex
 const vscodeextensionsContent = fs.readFileSync(vscodeextensionsFilePath, 'utf8');
 
 
-function gerarCaminhoEConteudo({ basePath, relativePath, destinationPath, format }) {
+interface IFile {
+    basePath: string;
+    
+    relativePath: string; destinationPath: string; format: string;
+}
+
+
+function gerarCaminhoEConteudo({ basePath, relativePath, destinationPath, format }: IFile) {
     // Verifica se a extensão já está presente no nome do arquivo
     const hasFormat = relativePath.endsWith(format);
 
@@ -247,7 +254,7 @@ const routesPrivateRouteModule = gerarCaminhoEConteudo({ basePath: 'templates', 
 
 const routesVerifyNotFoundModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/routes/VerifyNotFound/index.txt', destinationPath: 'src', format: '.tsx' });
 
-module.exports = [
+export const files = [
     {
         path: path.join('src', 'core', 'http', 'protocols', 'index.ts'),
         content: `${protocolsIndexContent}`,

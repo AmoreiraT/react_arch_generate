@@ -1,0 +1,26 @@
+export const directories = [
+    'src/core',
+    'src/core/http',
+    'src/core/http/protocols',
+    'src/core/error',
+    'src/routes',
+    'src/routes/PrivateRoute',
+    'src/routes/VerifyNotFound',
+    'src/features',
+    'src/@types',
+    'src/hooks',
+    'src/shared',
+    'src/shared/styles',
+    'src/shared/components',
+    'src/shared/components/ErrorBoundary',
+    'src/shared/utils',
+    'src/shared/utils/localStorage',
+    'src/shared/utils/masks',
+    'src/shared/utils/crash',
+    'src/i18n',
+    'stories',
+    'tests',
+    '.vscode',
+    'public'
+];
+ 

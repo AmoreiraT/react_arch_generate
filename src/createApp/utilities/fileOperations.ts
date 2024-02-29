@@ -1,7 +1,11 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-function createDirectories(basePath, directories) {
+export interface CreateDirectories { 
+    basePath: string; directories: string[];
+}
+
+export function createDirectories({basePath, directories}: CreateDirectories) {
     directories.forEach(dir => {
         const dirPath = path.join(basePath, dir);
         if (!fs.existsSync(dirPath)) {
@@ -11,7 +15,14 @@ function createDirectories(basePath, directories) {
     });
 }
 
-function createFiles(basePath, files) {
+export interface CreateFiles { 
+    basePath: string; files: {
+    path: string;
+    content: string;
+}[];
+}
+
+export function createFiles({basePath, files}: CreateFiles) {
     files.forEach(file => {
         const filePath = path.join(basePath, file.path);
         fs.writeFileSync(filePath, file.content);
@@ -19,4 +30,3 @@ function createFiles(basePath, files) {
     });
 }
 
-module.exports = { createDirectories, createFiles };

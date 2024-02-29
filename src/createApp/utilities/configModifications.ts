@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 const arquivosGerados = [
   'src/vite-env.d.ts',
@@ -8,7 +8,7 @@ const arquivosGerados = [
   'src/App.css',
 ];
 
-function modifyViteConfig(basePath) {
+export function modifyViteConfig(basePath: string) {
   const viteConfigPath = `${basePath}/vite.config.ts`;
   const viteConfigFilePath = path.join(__dirname, 'templates', 'vite.config.txt');
   const viteConfigContent = fs.readFileSync(viteConfigFilePath, 'utf8');
@@ -17,7 +17,7 @@ function modifyViteConfig(basePath) {
   console.log('vite.config.ts modified successfully.');
 }
 
-function modifyTsConfig(basePath) {
+export function modifyTsConfig(basePath: string) {
   const tsConfigPath = `${basePath}/tsconfig.json`;
   const tsConfigFilePath = path.join(__dirname, 'templates', 'tsconfig.txt');
   const tsConfigContent = fs.readFileSync(tsConfigFilePath, 'utf8');
@@ -32,7 +32,7 @@ function modifyTsConfig(basePath) {
   console.log('tsconfig.json modified successfully.');
 }
 
-function modifyMainTxt(basePath) {
+export function modifyMainTxt(basePath: string) {
   const mainPath = `${basePath}/src/main.tsx`;
   const mainFilePath = path.join(__dirname, 'templates', 'main.txt');
   const mainContent = fs.readFileSync(mainFilePath, 'utf8');
@@ -42,7 +42,7 @@ function modifyMainTxt(basePath) {
   console.log('main.tsx modified successfully.');
 }
 
-function removerArquivosGerados(appName) {
+export function removerArquivosGerados(appName: string) {
   arquivosGerados.forEach((arquivo) => {
     const caminhoArquivo = path.join(appName, arquivo);
     if (fs.existsSync(caminhoArquivo)) {
@@ -52,4 +52,4 @@ function removerArquivosGerados(appName) {
   });
 }
 
-module.exports = { modifyViteConfig, modifyTsConfig, removerArquivosGerados, modifyMainTxt };
+
