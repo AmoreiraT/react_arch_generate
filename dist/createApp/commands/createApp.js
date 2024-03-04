@@ -1,10 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createApp = void 0;
-const child_process_1 = require("child_process");
-function createApp(appName) {
-    const createAppCommand = `npm create vite@latest ${appName} -- --template react-ts`;
-    console.log(`Creating a new React + TypeScript project named ${appName}...`);
-    (0, child_process_1.execSync)(createAppCommand, { stdio: 'inherit' });
-}
+const execa_1 = require("execa");
+const createApp = async (name) => {
+    await (0, execa_1.execa)('npx', ['create-react-app', name], { stdio: 'inherit' });
+};
 exports.createApp = createApp;

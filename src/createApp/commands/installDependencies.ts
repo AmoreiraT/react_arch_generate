@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { execSync } from 'child_process';
 
 const dependencies = [
     '@emotion/react',
@@ -84,7 +83,7 @@ const additionalPackages = {
     },
 };
 
-export function installDependencies(appName: string, packageManager = 'npm') {
+export async function installDependencies(appName: string, packageManager = 'npm') {
     process.chdir(appName);
 
 
@@ -100,7 +99,12 @@ export function installDependencies(appName: string, packageManager = 'npm') {
 
     const dotEnv = 'npm i @dotenvx/dotenvx --save';
 
-    execSync(dotEnv, { stdio: 'inherit' });
+    // execSync(dotEnv, { stdio: 'inherit' });
+
+
+      const execa = (await import('execa')).default;
+
+    await execa.execa(dotEnv, { stdio: 'inherit' });
 
     console.info(`to futher implements chooses btween yarn pnpm and npm ...`);
 
@@ -118,22 +122,28 @@ export function installDependencies(appName: string, packageManager = 'npm') {
             installCommand = 'npm install';
     }
 
-    execSync(installCommand, { stdio: 'inherit' });
+    // execSync(installCommand, { stdio: 'inherit' });
+    await execa.execa(installCommand, { stdio: 'inherit' });
+
     console.info('Dependencies installed successfully.');
 
-    execSync(`${packageManager} audit fix --force`, { stdio: 'inherit' });
+
+        await execa.execa(`${packageManager} audit fix --force`, { stdio: 'inherit' });
+
     console.info('Dependencies audit fixed successfully.');
 
     console.info(`Installing another necessaries dependencies using ${packageManager}...`);
     for (const dependency of dependencies) {
         console.info(`Installing  ${dependency}...`);
-        execSync(`${packageManager} i ${dependency} --save`, { stdio: 'inherit' });
+
+                await execa.execa(`${packageManager} i ${dependency} --save`, { stdio: 'inherit' });
+
     }
 
     console.info(`Installing another necessaries devDependencies using ${packageManager}...`);
     for (const devDependency of devDependencies) {
         console.info(`Installing  ${devDependency}...`);
-        execSync(`${packageManager} i ${devDependency} --save-dev`, { stdio: 'inherit' });
+                await execa.execa(`${packageManager} i ${devDependency} --save`, { stdio: 'inherit' });
     }
 
 

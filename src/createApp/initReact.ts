@@ -1,10 +1,3 @@
-// import {createApp} from './commands/createApp.ts';
-// import installDependencies from './commands/installDependencies.js';
-// import setupDirectories from './configurations/directories.js';
-// import setupFiles from './configurations/files.js';
-// import { createFiles, createDirectories } from './utilities/fileOperations.js';
-// import { modifyTsConfig, modifyViteConfig, removerArquivosGerados, modifyMainTxt } from './utilities/configModifications.js';
-
 import { createApp } from "./commands/createApp";
 import { installDependencies } from "./commands/installDependencies";
 import { directories } from "./configurations/directories";
@@ -12,15 +5,9 @@ import { files } from "./configurations/files";
 import { modifyTsConfig, modifyViteConfig, modifyMainTxt, removerArquivosGerados } from "./utilities/configModifications";
 import { createDirectories, createFiles } from "./utilities/fileOperations";
 
-const appName = process.argv[2] || 'my-react-app';
 
-const packageManager = process.argv[3] || 'npm';
 
-/**
- * Initializes a new React + TypeScript project.
- * @returns {Promise<void>} A promise that resolves when the project initialization is complete.
- */
-async function initReact() {
+export async function initReact(appName: string, packageManager: string)  {
     console.log(`Creating a new React + TypeScript project named ${appName}...`);
     createApp(appName);
 
@@ -44,4 +31,4 @@ async function initReact() {
     console.log('Project initialization complete.');
 }
 
-initReact();
+// initReact(appName, packageManager);

@@ -4,15 +4,16 @@
   "description": "A tool for generating React + TypeScript projects with integrated design tokens from Figma.",
   "main": "dist/server.js",
   "scripts": {
+    "dev": "concurrently \"cd client && npm run dev\" \"ts-node src/server.ts\"",
+    "build": "cd client && npm run build && tsc -p .",
     "start": "node dist/server.js",
-    "build": "tsc",
-    "dev": "ts-node src/server.ts",
     "lint": "eslint 'src/**/*.{ts,tsx}' --quiet"
   },
   "keywords": [],
-  "author": "",
+  "author": "Thiago",
   "license": "ISC",
   "dependencies": {
+    "execa": "^8.0.1",
     "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

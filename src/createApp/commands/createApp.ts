@@ -1,8 +1,7 @@
-import { execSync } from 'child_process';
+// import  {execa}  from 'execa';
 
-export function createApp(appName: string) {
-    const createAppCommand = `npm create vite@latest ${appName} -- --template react-ts`;
-    console.log(`Creating a new React + TypeScript project named ${appName}...`);
-    execSync(createAppCommand, { stdio: 'inherit' });
+export const createApp = async (name: string): Promise<void> => {
+      const execa = (await import('execa')).default;
+
+    await execa.execa('npx', ['create-react-app', name], { stdio: 'inherit' });
 }
-
