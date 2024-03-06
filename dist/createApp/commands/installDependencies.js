@@ -1,4 +1,27 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -6,7 +29,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.installDependencies = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
-const child_process_1 = require("child_process");
 const dependencies = [
     '@emotion/react',
     '@emotion/styled',
@@ -86,7 +108,7 @@ const additionalPackages = {
         "vitest-ui": "vitest --ui"
     },
 };
-function installDependencies(appName, packageManager = 'npm') {
+async function installDependencies(appName, packageManager = 'npm') {
     process.chdir(appName);
     const packageJsonPath = path_1.default.join(process.cwd(), 'package.json');
     const packageJson = require(packageJsonPath);
@@ -94,7 +116,9 @@ function installDependencies(appName, packageManager = 'npm') {
     fs_1.default.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
     console.info('Updated package.json scripts.');
     const dotEnv = 'npm i @dotenvx/dotenvx --save';
-    (0, child_process_1.execSync)(dotEnv, { stdio: 'inherit' });
+    // execSync(dotEnv, { stdio: 'inherit' });
+    const execa = (await Promise.resolve().then(() => __importStar(require('execa')))).default;
+    await execa.execa(dotEnv, { stdio: 'inherit' });
     console.info(`to futher implements chooses btween yarn pnpm and npm ...`);
     console.info(`Installing dependencies using ${packageManager}...`);
     let installCommand;
@@ -108,19 +132,20 @@ function installDependencies(appName, packageManager = 'npm') {
         default:
             installCommand = 'npm install';
     }
-    (0, child_process_1.execSync)(installCommand, { stdio: 'inherit' });
+    // execSync(installCommand, { stdio: 'inherit' });
+    await execa.execa(installCommand, { stdio: 'inherit' });
     console.info('Dependencies installed successfully.');
-    (0, child_process_1.execSync)(`${packageManager} audit fix --force`, { stdio: 'inherit' });
+    await execa.execa(`${packageManager} audit fix --force`, { stdio: 'inherit' });
     console.info('Dependencies audit fixed successfully.');
     console.info(`Installing another necessaries dependencies using ${packageManager}...`);
     for (const dependency of dependencies) {
         console.info(`Installing  ${dependency}...`);
-        (0, child_process_1.execSync)(`${packageManager} i ${dependency} --save`, { stdio: 'inherit' });
+        await execa.execa(`${packageManager} i ${dependency} --save`, { stdio: 'inherit' });
     }
     console.info(`Installing another necessaries devDependencies using ${packageManager}...`);
     for (const devDependency of devDependencies) {
         console.info(`Installing  ${devDependency}...`);
-        (0, child_process_1.execSync)(`${packageManager} i ${devDependency} --save-dev`, { stdio: 'inherit' });
+        await execa.execa(`${packageManager} i ${devDependency} --save`, { stdio: 'inherit' });
     }
     console.log(`%cAll ready!`, "color: yellow; font-style: italic; background-color: blue;padding: 2px");
 }

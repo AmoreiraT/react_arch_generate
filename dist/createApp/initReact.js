@@ -9,7 +9,7 @@ const configModifications_1 = require("./utilities/configModifications");
 const fileOperations_1 = require("./utilities/fileOperations");
 async function initReact(appName, packageManager) {
     console.log(`Creating a new React + TypeScript project named ${appName}...`);
-    (0, createApp_1.createApp)(appName);
+    await (0, createApp_1.createApp)(appName);
     console.info('Setting up directories...');
     (0, fileOperations_1.createDirectories)({ basePath: appName, directories: directories_1.directories });
     console.info('Creating initial files...');

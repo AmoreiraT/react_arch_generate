@@ -1,116 +1,113 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.files = void 0;
-const path_1 = __importDefault(require("path"));
-const fs_1 = __importDefault(require("fs"));
+const path_1 = require("path");
+const node_fs_1 = require("node:fs");
 // core/http/protocols
-const protocolsIndexFilePath = path_1.default.join(__dirname, 'templates', 'core', 'http', 'protocols', 'index.txt');
-const protocolsBodyFilePath = path_1.default.join(__dirname, 'templates', 'core', 'http', 'protocols', 'body.txt');
-const protocolsDtoFilePath = path_1.default.join(__dirname, 'templates', 'core', 'http', 'protocols', 'dto.txt');
-const protocolsRequestFilePath = path_1.default.join(__dirname, 'templates', 'core', 'http', 'protocols', 'request.txt');
-const protocolsResponseFilePath = path_1.default.join(__dirname, 'templates', 'core', 'http', 'protocols', 'response.txt');
-const protocolsMethodFilePath = path_1.default.join(__dirname, 'templates', 'core', 'http', 'protocols', 'method.txt');
-const protocolsStatusCodeFilePath = path_1.default.join(__dirname, 'templates', 'core', 'http', 'protocols', 'status-code.txt');
-const protocolsUrlFilePath = path_1.default.join(__dirname, 'templates', 'core', 'http', 'protocols', 'url.txt');
-const protocolsIndexContent = fs_1.default.readFileSync(protocolsIndexFilePath, 'utf8');
-const protocolsBodyContent = fs_1.default.readFileSync(protocolsBodyFilePath, 'utf8');
-const protocolsDtoContent = fs_1.default.readFileSync(protocolsDtoFilePath, 'utf8');
-const protocolsRequestContent = fs_1.default.readFileSync(protocolsRequestFilePath, 'utf8');
-const protocolsResponseContent = fs_1.default.readFileSync(protocolsResponseFilePath, 'utf8');
-const protocolsMethodContent = fs_1.default.readFileSync(protocolsMethodFilePath, 'utf8');
-const protocolsStatusCodeContent = fs_1.default.readFileSync(protocolsStatusCodeFilePath, 'utf8');
-const protocolsUrlContent = fs_1.default.readFileSync(protocolsUrlFilePath, 'utf8');
+const protocolsIndexFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'http', 'protocols', 'index.txt');
+const protocolsBodyFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'http', 'protocols', 'body.txt');
+const protocolsDtoFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'http', 'protocols', 'dto.txt');
+const protocolsRequestFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'http', 'protocols', 'request.txt');
+const protocolsResponseFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'http', 'protocols', 'response.txt');
+const protocolsMethodFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'http', 'protocols', 'method.txt');
+const protocolsStatusCodeFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'http', 'protocols', 'status-code.txt');
+const protocolsUrlFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'http', 'protocols', 'url.txt');
+const protocolsIndexContent = (0, node_fs_1.readFileSync)(protocolsIndexFilePath, 'utf8');
+const protocolsBodyContent = (0, node_fs_1.readFileSync)(protocolsBodyFilePath, 'utf8');
+const protocolsDtoContent = (0, node_fs_1.readFileSync)(protocolsDtoFilePath, 'utf8');
+const protocolsRequestContent = (0, node_fs_1.readFileSync)(protocolsRequestFilePath, 'utf8');
+const protocolsResponseContent = (0, node_fs_1.readFileSync)(protocolsResponseFilePath, 'utf8');
+const protocolsMethodContent = (0, node_fs_1.readFileSync)(protocolsMethodFilePath, 'utf8');
+const protocolsStatusCodeContent = (0, node_fs_1.readFileSync)(protocolsStatusCodeFilePath, 'utf8');
+const protocolsUrlContent = (0, node_fs_1.readFileSync)(protocolsUrlFilePath, 'utf8');
 // core/http
-const httpIndexFilePath = path_1.default.join(__dirname, 'templates', 'core', 'http', 'index.txt');
-const httpIndexContent = fs_1.default.readFileSync(httpIndexFilePath, 'utf8');
+const httpIndexFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'http', 'index.txt');
+const httpIndexContent = (0, node_fs_1.readFileSync)(httpIndexFilePath, 'utf8');
 // core/error
-const errorIndexFilePath = path_1.default.join(__dirname, 'templates', 'core', 'error', 'index.txt');
-const errorIndexContent = fs_1.default.readFileSync(errorIndexFilePath, 'utf8');
-const errorApiFilePath = path_1.default.join(__dirname, 'templates', 'core', 'error', 'api.txt');
-const errorApiContent = fs_1.default.readFileSync(errorApiFilePath, 'utf8');
-const errorErrorResponseFilePath = path_1.default.join(__dirname, 'templates', 'core', 'error', 'errorResponse.txt');
-const errorErrorResponseContent = fs_1.default.readFileSync(errorErrorResponseFilePath, 'utf8');
-const errorStatusFilePath = path_1.default.join(__dirname, 'templates', 'core', 'error', 'status.txt');
-const errorStatusContent = fs_1.default.readFileSync(errorStatusFilePath, 'utf8');
-const errorTimeoutFilePath = path_1.default.join(__dirname, 'templates', 'core', 'error', 'timeout.txt');
-const errorTimeoutContent = fs_1.default.readFileSync(errorTimeoutFilePath, 'utf8');
-const errorUnknownFilePath = path_1.default.join(__dirname, 'templates', 'core', 'error', 'unknown.txt');
-const errorUnknownContent = fs_1.default.readFileSync(errorUnknownFilePath, 'utf8');
+const errorIndexFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'error', 'index.txt');
+const errorIndexContent = (0, node_fs_1.readFileSync)(errorIndexFilePath, 'utf8');
+const errorApiFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'error', 'api.txt');
+const errorApiContent = (0, node_fs_1.readFileSync)(errorApiFilePath, 'utf8');
+const errorErrorResponseFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'error', 'errorResponse.txt');
+const errorErrorResponseContent = (0, node_fs_1.readFileSync)(errorErrorResponseFilePath, 'utf8');
+const errorStatusFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'error', 'status.txt');
+const errorStatusContent = (0, node_fs_1.readFileSync)(errorStatusFilePath, 'utf8');
+const errorTimeoutFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'error', 'timeout.txt');
+const errorTimeoutContent = (0, node_fs_1.readFileSync)(errorTimeoutFilePath, 'utf8');
+const errorUnknownFilePath = (0, path_1.join)(__dirname, 'templates', 'core', 'error', 'unknown.txt');
+const errorUnknownContent = (0, node_fs_1.readFileSync)(errorUnknownFilePath, 'utf8');
 // @types
-const typesEnvFilePath = path_1.default.join(__dirname, 'templates', '@types', 'env.d.txt');
-const typesEnvContent = fs_1.default.readFileSync(typesEnvFilePath, 'utf8');
+const typesEnvFilePath = (0, path_1.join)(__dirname, 'templates', '@types', 'env.d.txt');
+const typesEnvContent = (0, node_fs_1.readFileSync)(typesEnvFilePath, 'utf8');
 // shared/utils
-const sharedUtilsCrashCrashFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'crash', 'crash.txt');
-const sharedUtilsCrashCrashContent = fs_1.default.readFileSync(sharedUtilsCrashCrashFilePath, 'utf8');
-const sharedUtilsLocalStorageIndexFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'localStorage', 'index.txt');
-const sharedUtilsLocalStorageIndexContent = fs_1.default.readFileSync(sharedUtilsLocalStorageIndexFilePath, 'utf8');
-const sharedUtilsCopyTextToClipboardFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'copyTextToClipboard.txt');
-const sharedUtilsCopyTextToClipboardContent = fs_1.default.readFileSync(sharedUtilsCopyTextToClipboardFilePath, 'utf8');
-const sharedUtilsFunctionsFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'functions.txt');
-const sharedUtilsFunctionsContent = fs_1.default.readFileSync(sharedUtilsFunctionsFilePath, 'utf8');
-const sharedUtilsValidIsIntegerFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'validIsInteger.txt');
-const sharedUtilsValidIsIntegerContent = fs_1.default.readFileSync(sharedUtilsValidIsIntegerFilePath, 'utf8');
-const sharedUtilsValidNameAndLastNameFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'validNameAndLastName.txt');
-const sharedUtilsValidNameAndLastNameContent = fs_1.default.readFileSync(sharedUtilsValidNameAndLastNameFilePath, 'utf8');
-const sharedUtilsMasksCepMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'cepMask.txt');
-const sharedUtilsMasksCepMaskContent = fs_1.default.readFileSync(sharedUtilsMasksCepMaskFilePath, 'utf8');
-const sharedUtilsMasksCnpjMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'cnpjMask.txt');
-const sharedUtilsMasksCnpjMaskContent = fs_1.default.readFileSync(sharedUtilsMasksCnpjMaskFilePath, 'utf8');
-const sharedUtilsMasksCpfMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'cpfMask.txt');
-const sharedUtilsMasksCpfMaskContent = fs_1.default.readFileSync(sharedUtilsMasksCpfMaskFilePath, 'utf8');
-const sharedUtilsMasksCurrencyMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'currencyMask.txt');
-const sharedUtilsMasksCurrencyMaskContent = fs_1.default.readFileSync(sharedUtilsMasksCurrencyMaskFilePath, 'utf8');
-const sharedUtilsMasksDayOfMonthFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'dayOfMonth.txt');
-const sharedUtilsMasksDayOfMonthContent = fs_1.default.readFileSync(sharedUtilsMasksDayOfMonthFilePath, 'utf8');
-const sharedUtilsMasksDocumentIdMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'documentIdMask.txt');
-const sharedUtilsMasksDocumentIdMaskContent = fs_1.default.readFileSync(sharedUtilsMasksDocumentIdMaskFilePath, 'utf8');
-const sharedUtilsMasksIndexFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'index.txt');
-const sharedUtilsMasksIndexContent = fs_1.default.readFileSync(sharedUtilsMasksIndexFilePath, 'utf8');
-const sharedUtilsMasksNumericIdMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'numericIdMask.txt');
-const sharedUtilsMasksNumericIdMaskContent = fs_1.default.readFileSync(sharedUtilsMasksNumericIdMaskFilePath, 'utf8');
-const sharedUtilsMasksOnlyLettersFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'onlyLetters.txt');
-const sharedUtilsMasksOnlyLettersContent = fs_1.default.readFileSync(sharedUtilsMasksOnlyLettersFilePath, 'utf8');
-const sharedUtilsMasksOnlyNumbersFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'onlyNumbers.txt');
-const sharedUtilsMasksOnlyNumbersContent = fs_1.default.readFileSync(sharedUtilsMasksOnlyNumbersFilePath, 'utf8');
-const sharedUtilsMasksPhoneMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'phoneMask.txt');
-const sharedUtilsMasksPhoneMaskContent = fs_1.default.readFileSync(sharedUtilsMasksPhoneMaskFilePath, 'utf8');
-const sharedUtilsMasksPisMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'pisMask.txt');
-const sharedUtilsMasksPisMaskContent = fs_1.default.readFileSync(sharedUtilsMasksPisMaskFilePath, 'utf8');
-const sharedUtilsMasksRgMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'rgMask.txt');
-const sharedUtilsMasksRgMaskContent = fs_1.default.readFileSync(sharedUtilsMasksRgMaskFilePath, 'utf8');
-const sharedUtilsMasksUnCnpjMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'unCnpjMask.txt');
-const sharedUtilsMasksUnCnpjMaskContent = fs_1.default.readFileSync(sharedUtilsMasksUnCnpjMaskFilePath, 'utf8');
-const sharedUtilsMasksUnCurrencyMaskFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'unCurrencyMask.txt');
-const sharedUtilsMasksUnCurrencyMaskContent = fs_1.default.readFileSync(sharedUtilsMasksUnCurrencyMaskFilePath, 'utf8');
-const sharedUtilsMasksUnMaskPhoneFilePath = path_1.default.join(__dirname, 'templates', 'shared', 'utils', 'masks', 'unMaskPhone.txt');
-const sharedUtilsMasksUnMaskPhoneContent = fs_1.default.readFileSync(sharedUtilsMasksUnMaskPhoneFilePath, 'utf8');
+const sharedUtilsCrashCrashFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'crash', 'crash.txt');
+const sharedUtilsCrashCrashContent = (0, node_fs_1.readFileSync)(sharedUtilsCrashCrashFilePath, 'utf8');
+const sharedUtilsLocalStorageIndexFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'localStorage', 'index.txt');
+const sharedUtilsLocalStorageIndexContent = (0, node_fs_1.readFileSync)(sharedUtilsLocalStorageIndexFilePath, 'utf8');
+const sharedUtilsCopyTextToClipboardFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'copyTextToClipboard.txt');
+const sharedUtilsCopyTextToClipboardContent = (0, node_fs_1.readFileSync)(sharedUtilsCopyTextToClipboardFilePath, 'utf8');
+const sharedUtilsFunctionsFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'functions.txt');
+const sharedUtilsFunctionsContent = (0, node_fs_1.readFileSync)(sharedUtilsFunctionsFilePath, 'utf8');
+const sharedUtilsValidIsIntegerFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'validIsInteger.txt');
+const sharedUtilsValidIsIntegerContent = (0, node_fs_1.readFileSync)(sharedUtilsValidIsIntegerFilePath, 'utf8');
+const sharedUtilsValidNameAndLastNameFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'validNameAndLastName.txt');
+const sharedUtilsValidNameAndLastNameContent = (0, node_fs_1.readFileSync)(sharedUtilsValidNameAndLastNameFilePath, 'utf8');
+const sharedUtilsMasksCepMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'cepMask.txt');
+const sharedUtilsMasksCepMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksCepMaskFilePath, 'utf8');
+const sharedUtilsMasksCnpjMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'cnpjMask.txt');
+const sharedUtilsMasksCnpjMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksCnpjMaskFilePath, 'utf8');
+const sharedUtilsMasksCpfMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'cpfMask.txt');
+const sharedUtilsMasksCpfMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksCpfMaskFilePath, 'utf8');
+const sharedUtilsMasksCurrencyMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'currencyMask.txt');
+const sharedUtilsMasksCurrencyMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksCurrencyMaskFilePath, 'utf8');
+const sharedUtilsMasksDayOfMonthFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'dayOfMonth.txt');
+const sharedUtilsMasksDayOfMonthContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksDayOfMonthFilePath, 'utf8');
+const sharedUtilsMasksDocumentIdMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'documentIdMask.txt');
+const sharedUtilsMasksDocumentIdMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksDocumentIdMaskFilePath, 'utf8');
+const sharedUtilsMasksIndexFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'index.txt');
+const sharedUtilsMasksIndexContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksIndexFilePath, 'utf8');
+const sharedUtilsMasksNumericIdMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'numericIdMask.txt');
+const sharedUtilsMasksNumericIdMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksNumericIdMaskFilePath, 'utf8');
+const sharedUtilsMasksOnlyLettersFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'onlyLetters.txt');
+const sharedUtilsMasksOnlyLettersContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksOnlyLettersFilePath, 'utf8');
+const sharedUtilsMasksOnlyNumbersFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'onlyNumbers.txt');
+const sharedUtilsMasksOnlyNumbersContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksOnlyNumbersFilePath, 'utf8');
+const sharedUtilsMasksPhoneMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'phoneMask.txt');
+const sharedUtilsMasksPhoneMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksPhoneMaskFilePath, 'utf8');
+const sharedUtilsMasksPisMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'pisMask.txt');
+const sharedUtilsMasksPisMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksPisMaskFilePath, 'utf8');
+const sharedUtilsMasksRgMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'rgMask.txt');
+const sharedUtilsMasksRgMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksRgMaskFilePath, 'utf8');
+const sharedUtilsMasksUnCnpjMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'unCnpjMask.txt');
+const sharedUtilsMasksUnCnpjMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksUnCnpjMaskFilePath, 'utf8');
+const sharedUtilsMasksUnCurrencyMaskFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'unCurrencyMask.txt');
+const sharedUtilsMasksUnCurrencyMaskContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksUnCurrencyMaskFilePath, 'utf8');
+const sharedUtilsMasksUnMaskPhoneFilePath = (0, path_1.join)(__dirname, 'templates', 'shared', 'utils', 'masks', 'unMaskPhone.txt');
+const sharedUtilsMasksUnMaskPhoneContent = (0, node_fs_1.readFileSync)(sharedUtilsMasksUnMaskPhoneFilePath, 'utf8');
 // tests
-const testsFilePath = path_1.default.join(__dirname, 'templates', 'tests', 'setup.txt');
-const testsContent = fs_1.default.readFileSync(testsFilePath, 'utf8');
+const testsFilePath = (0, path_1.join)(__dirname, 'templates', 'tests', 'setup.txt');
+const testsContent = (0, node_fs_1.readFileSync)(testsFilePath, 'utf8');
 // vscode
-const vscodesettingsFilePath = path_1.default.join(__dirname, 'templates', 'vscode', 'settings.txt');
-const vscodesettingsContent = fs_1.default.readFileSync(vscodesettingsFilePath, 'utf8');
-const vscodetaskFilePath = path_1.default.join(__dirname, 'templates', 'vscode', 'task.txt');
-const vscodetaskContent = fs_1.default.readFileSync(vscodetaskFilePath, 'utf8');
-const vscodelaunchFilePath = path_1.default.join(__dirname, 'templates', 'vscode', 'launch.txt');
-const vscodelaunchContent = fs_1.default.readFileSync(vscodelaunchFilePath, 'utf8');
-const vscodeextensionsFilePath = path_1.default.join(__dirname, 'templates', 'vscode', 'extensions.txt');
-const vscodeextensionsContent = fs_1.default.readFileSync(vscodeextensionsFilePath, 'utf8');
+const vscodesettingsFilePath = (0, path_1.join)(__dirname, 'templates', 'vscode', 'settings.txt');
+const vscodesettingsContent = (0, node_fs_1.readFileSync)(vscodesettingsFilePath, 'utf8');
+const vscodetaskFilePath = (0, path_1.join)(__dirname, 'templates', 'vscode', 'task.txt');
+const vscodetaskContent = (0, node_fs_1.readFileSync)(vscodetaskFilePath, 'utf8');
+const vscodelaunchFilePath = (0, path_1.join)(__dirname, 'templates', 'vscode', 'launch.txt');
+const vscodelaunchContent = (0, node_fs_1.readFileSync)(vscodelaunchFilePath, 'utf8');
+const vscodeextensionsFilePath = (0, path_1.join)(__dirname, 'templates', 'vscode', 'extensions.txt');
+const vscodeextensionsContent = (0, node_fs_1.readFileSync)(vscodeextensionsFilePath, 'utf8');
 function gerarCaminhoEConteudo({ basePath, relativePath, destinationPath, format }) {
     // Verifica se a extensão já está presente no nome do arquivo
     const hasFormat = relativePath.endsWith(format);
     // Monta o caminho do arquivo de template com ou sem '.txt'
     const filePath = hasFormat
-        ? path_1.default.join(__dirname, basePath, `${relativePath}.txt`) : path_1.default.join(__dirname, basePath, ...relativePath.split('/'));
+        ? (0, path_1.join)(__dirname, basePath, `${relativePath}.txt`) : (0, path_1.join)(__dirname, basePath, ...relativePath.split('/'));
     // Define o caminho de destino
     const destinationPathSet = hasFormat
-        ? path_1.default.join(destinationPath, hasFormat ? relativePath : relativePath.replace('.txt', ''))
-        : path_1.default.join(destinationPath, hasFormat ? relativePath : relativePath.replace('.txt', format));
+        ? (0, path_1.join)(destinationPath, hasFormat ? relativePath : relativePath.replace('.txt', ''))
+        : (0, path_1.join)(destinationPath, hasFormat ? relativePath : relativePath.replace('.txt', format));
     // Lê o conteúdo do arquivo
-    const fileContent = fs_1.default.readFileSync(filePath, 'utf8');
+    const fileContent = (0, node_fs_1.readFileSync)(filePath, 'utf8');
     return {
         path: destinationPathSet,
         content: fileContent,
@@ -130,179 +127,179 @@ const routesPrivateRouteModule = gerarCaminhoEConteudo({ basePath: 'templates', 
 const routesVerifyNotFoundModule = gerarCaminhoEConteudo({ basePath: 'templates', relativePath: '/routes/VerifyNotFound/index.txt', destinationPath: 'src', format: '.tsx' });
 exports.files = [
     {
-        path: path_1.default.join('src', 'core', 'http', 'protocols', 'index.ts'),
+        path: (0, path_1.join)('src', 'core', 'http', 'protocols', 'index.ts'),
         content: `${protocolsIndexContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'http', 'protocols', 'body.ts'),
+        path: (0, path_1.join)('src', 'core', 'http', 'protocols', 'body.ts'),
         content: `${protocolsBodyContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'http', 'protocols', 'dto.ts'),
+        path: (0, path_1.join)('src', 'core', 'http', 'protocols', 'dto.ts'),
         content: `${protocolsDtoContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'http', 'protocols', 'request.ts'),
+        path: (0, path_1.join)('src', 'core', 'http', 'protocols', 'request.ts'),
         content: `${protocolsRequestContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'http', 'protocols', 'response.ts'),
+        path: (0, path_1.join)('src', 'core', 'http', 'protocols', 'response.ts'),
         content: `${protocolsResponseContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'http', 'protocols', 'method.ts'),
+        path: (0, path_1.join)('src', 'core', 'http', 'protocols', 'method.ts'),
         content: `${protocolsMethodContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'http', 'protocols', 'status-code.ts'),
+        path: (0, path_1.join)('src', 'core', 'http', 'protocols', 'status-code.ts'),
         content: `${protocolsStatusCodeContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'http', 'protocols', 'url.ts'),
+        path: (0, path_1.join)('src', 'core', 'http', 'protocols', 'url.ts'),
         content: `${protocolsUrlContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'http', 'index.ts'),
+        path: (0, path_1.join)('src', 'core', 'http', 'index.ts'),
         content: `${httpIndexContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'error', 'index.ts'),
+        path: (0, path_1.join)('src', 'core', 'error', 'index.ts'),
         content: `${errorIndexContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'error', 'api.ts'),
+        path: (0, path_1.join)('src', 'core', 'error', 'api.ts'),
         content: `${errorApiContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'error', 'errorResponse.ts'),
+        path: (0, path_1.join)('src', 'core', 'error', 'errorResponse.ts'),
         content: `${errorErrorResponseContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'error', 'status.ts'),
+        path: (0, path_1.join)('src', 'core', 'error', 'status.ts'),
         content: `${errorStatusContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'error', 'timeout.ts'),
+        path: (0, path_1.join)('src', 'core', 'error', 'timeout.ts'),
         content: `${errorTimeoutContent}`,
     },
     {
-        path: path_1.default.join('src', 'core', 'error', 'unknown.ts'),
+        path: (0, path_1.join)('src', 'core', 'error', 'unknown.ts'),
         content: `${errorUnknownContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'copyTextToClipboard.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'copyTextToClipboard.ts'),
         content: `${sharedUtilsCopyTextToClipboardContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'functions.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'functions.ts'),
         content: `${sharedUtilsFunctionsContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'validIsInteger.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'validIsInteger.ts'),
         content: `${sharedUtilsValidIsIntegerContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'validNameAndLastName.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'validNameAndLastName.ts'),
         content: `${sharedUtilsValidNameAndLastNameContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'cepMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'cepMask.ts'),
         content: `${sharedUtilsMasksCepMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'cnpjMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'cnpjMask.ts'),
         content: `${sharedUtilsMasksCnpjMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'cpfMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'cpfMask.ts'),
         content: `${sharedUtilsMasksCpfMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'currencyMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'currencyMask.ts'),
         content: `${sharedUtilsMasksCurrencyMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'dayOfMonth.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'dayOfMonth.ts'),
         content: `${sharedUtilsMasksDayOfMonthContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'documentIdMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'documentIdMask.ts'),
         content: `${sharedUtilsMasksDocumentIdMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'index.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'index.ts'),
         content: `${sharedUtilsMasksIndexContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'numericIdMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'numericIdMask.ts'),
         content: `${sharedUtilsMasksNumericIdMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'onlyLetters.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'onlyLetters.ts'),
         content: `${sharedUtilsMasksOnlyLettersContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'onlyNumbers.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'onlyNumbers.ts'),
         content: `${sharedUtilsMasksOnlyNumbersContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'phoneMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'phoneMask.ts'),
         content: `${sharedUtilsMasksPhoneMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'pisMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'pisMask.ts'),
         content: `${sharedUtilsMasksPisMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'rgMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'rgMask.ts'),
         content: `${sharedUtilsMasksRgMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'unCnpjMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'unCnpjMask.ts'),
         content: `${sharedUtilsMasksUnCnpjMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'unCurrencyMask.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'unCurrencyMask.ts'),
         content: `${sharedUtilsMasksUnCurrencyMaskContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'masks', 'unMaskPhone.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'masks', 'unMaskPhone.ts'),
         content: `${sharedUtilsMasksUnMaskPhoneContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'localStorage', 'index.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'localStorage', 'index.ts'),
         content: `${sharedUtilsLocalStorageIndexContent}`,
     },
     {
-        path: path_1.default.join('src', 'shared', 'utils', 'crash', 'crash.ts'),
+        path: (0, path_1.join)('src', 'shared', 'utils', 'crash', 'crash.ts'),
         content: `${sharedUtilsCrashCrashContent}`,
     },
     {
-        path: path_1.default.join('src', '@types', 'env.d.ts'),
+        path: (0, path_1.join)('src', '@types', 'env.d.ts'),
         content: `${typesEnvContent}`,
     },
     {
-        path: path_1.default.join('.vscode', 'settings.json'),
+        path: (0, path_1.join)('.vscode', 'settings.json'),
         content: `${vscodesettingsContent}`,
     },
     {
-        path: path_1.default.join('.vscode', 'tasks.json'),
+        path: (0, path_1.join)('.vscode', 'tasks.json'),
         content: `${vscodetaskContent}`,
     },
     {
-        path: path_1.default.join('.vscode', 'launch.json'),
+        path: (0, path_1.join)('.vscode', 'launch.json'),
         content: `${vscodelaunchContent}`,
     },
     {
-        path: path_1.default.join('.vscode', 'extensions.json'),
+        path: (0, path_1.join)('.vscode', 'extensions.json'),
         content: `${vscodeextensionsContent}`,
     },
     {
-        path: path_1.default.join('tests', 'setup.ts'),
+        path: (0, path_1.join)('tests', 'setup.ts'),
         content: `${testsContent}`,
     },
     {
-        path: path_1.default.join('', '.env'),
+        path: (0, path_1.join)('', '.env'),
         content: `VITE_API_BASE_URL=http://api.com.br:20002/
 VITE_API_BASE_URL_DEV=http://api.com.br:20002/
 VITE_API_BASE_URL_SIT=https://api.sit.com.br/
@@ -313,26 +310,26 @@ VITE_MUI_LICENSE_TOKEN=6be6
 VITE_AMBIENTE=dev`,
     },
     {
-        path: path_1.default.join('', '.env.prod'),
+        path: (0, path_1.join)('', '.env.prod'),
         content: `VITE_API_BASE_URL=http://api.com.br:20002/
 VITE_API_BASE_URL_SIT=https://api.prod.com.br/
 VITE_MUI_LICENSE_TOKEN=6be6
 VITE_AMBIENTE=prod`,
     },
     {
-        path: path_1.default.join('', '.env.sit'),
+        path: (0, path_1.join)('', '.env.sit'),
         content: `VITE_API_BASE_URL=http://api.sit.com.br/
 VITE_MUI_LICENSE_TOKEN=6be6
 VITE_AMBIENTE=sit`,
     },
     {
-        path: path_1.default.join('', '.env.uat'),
+        path: (0, path_1.join)('', '.env.uat'),
         content: `VITE_API_BASE_URL=https://api.uat.com.br/
 VITE_MUI_LICENSE_TOKEN=6be6
 VITE_AMBIENTE=uat`,
     },
     {
-        path: path_1.default.join('', '.env.local'),
+        path: (0, path_1.join)('', '.env.local'),
         content: `VITE_API_BASE_URL=http://127.0.0.1:55632/
 VITE_MUI_LICENSE_TOKEN=6be6
 VITE_AMBIENTE=local`,

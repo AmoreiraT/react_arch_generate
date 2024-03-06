@@ -102,7 +102,7 @@ export async function installDependencies(appName: string, packageManager = 'npm
     // execSync(dotEnv, { stdio: 'inherit' });
 
 
-      const execa = (await import('execa')).default;
+    const execa = (await import('execa')).default;
 
     await execa.execa(dotEnv, { stdio: 'inherit' });
 

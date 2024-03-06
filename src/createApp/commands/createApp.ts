@@ -1,7 +1,7 @@
-// import  {execa}  from 'execa';
+import { execa } from "execa";
 
 export const createApp = async (name: string): Promise<void> => {
-      const execa = (await import('execa')).default;
+    // const execa = (await import('execa')).default;
 
-    await execa.execa('npx', ['create-react-app', name], { stdio: 'inherit' });
+    await execa('npx', ['create-react-app', name], { stdio: 'inherit' });
 }

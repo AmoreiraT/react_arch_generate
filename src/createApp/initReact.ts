@@ -9,7 +9,7 @@ import { createDirectories, createFiles } from "./utilities/fileOperations";
 
 export async function initReact(appName: string, packageManager: string)  {
     console.log(`Creating a new React + TypeScript project named ${appName}...`);
-    createApp(appName);
+    await createApp(appName);
 
     console.info('Setting up directories...');
     createDirectories({basePath: appName, directories});
